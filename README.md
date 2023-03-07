@@ -1,16 +1,19 @@
 # GPMsDB-dbtk
 
-GPMsDB-dbtk v1.0.1 was released on June xx, 2022. 
+GPMsDB-dbtk v1.0.1 was released on March 7, 2022. 
 
-GPMsDB-tk/GPMsDB-dbtk are software toolkits for assigning taxonomic identification to user-provided MALDI-TOF mass spectrometry profiles obtained from bacterial and archaeal cultured isolates. They take advantages of a newly developed database of protein mass profiles predicted from ~200,000 bacterial and archaeal genome sequences. This toolkit is also designed to work with customized databases, allowing microbial identification based on user-provided genome/metagenome-assembled genome (MAG) sequences. The ms-identification-tk is open source and released under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International Public License. 
+GPMsDB-tk/GPMsDB-dbtk are software toolkits for assigning taxonomic identification to user-provided MALDI-TOF mass spectrometry profiles obtained from bacterial and archaeal cultured isolates. They take advantages of a newly developed database of protein mass profiles predicted from ~200,000 bacterial and archaeal genome sequences. This toolkit is also designed to work with customized databases, allowing microbial identification based on user-provided genome/metagenome-assembled genome (MAG) sequences. The GPMsDB-dbtk is open source and released under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International Public License. 
 
-Please post questions and issues related to ms-identification-tk on the Issues section of the GitHub repository.
+GPMsDB-dbtk is used for customizing the GPMsDB with user-provided genomes and MAGs/SAGs. 
+
+Please post questions and issues related to GPMsDB-dbtk on the Issues section of the GitHub repository.
 
 ## Installing and using GPMsDB-dbtk
 
 Prerequisites
 * Python (version 3.7 or higher)
 * Cython (version 0.29.1 or higher)
+* [GPMsDB-tk](https://github.com/ysekig/GPMsDB-tk) (version 1.0.1 or higher) and relevand database (R01-RS95)
 * biolib (https://github.com/dparks1134/biolib) (version 0.1.8 or higher)
 * matplotlib (version 3.5.0 or higher)
 * Prodigal (https://github.com/hyattpd/Prodigal) (version 2.6.3 or higher)
@@ -19,12 +22,6 @@ Prerequisites
 In the source directory, the following command will compile and install the software in your python environment.
 ```bash
 python setup.py install
-```
-
-GPMsDB-dbtk requires ~60 GB of external data that needs to be downloaded and unarchived:
-```bash
-wget https://....data.tar.gz
-tar xvzf ....data.tar.gz
 ```
 
 GPMsDB-dbtk requires an environment variable named GPMsDB_PATH to be set to the directory containing the unarchived reference data.
