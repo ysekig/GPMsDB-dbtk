@@ -13,7 +13,7 @@ Please post questions and issues related to GPMsDB-dbtk on the Issues section of
 Prerequisites
 * Python (version 3.7 or higher)
 * Cython (version 0.29.1 or higher)
-* [GPMsDB-tk](https://github.com/ysekig/GPMsDB-tk) (version 1.0.1 or higher) and relevand database (R01-RS95)
+* [GPMsDB-tk](https://github.com/ysekig/GPMsDB-tk) (version 1.0.1 or higher) and relevand database ([R01-RS95](https://zenodo.org/record/7703483#.ZAbPNS_3Jf0))
 * biolib (https://github.com/dparks1134/biolib) (version 0.1.8 or higher)
 * matplotlib (version 3.5.0 or higher)
 * Prodigal (https://github.com/hyattpd/Prodigal) (version 2.6.3 or higher)
