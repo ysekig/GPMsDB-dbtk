@@ -1,0 +1,102 @@
+#!/usr/bin/env python
+
+__author__ = 'Yuji Sekiguchi'
+__copyright__ = 'Copyright (c) 2023 Yuji Sekiguchi, National Institute of Advanced Industrial Science and Technology (AIST)'
+__credits__ = ['Yuji Sekiguchi']
+__license__ = 'CC BY-NC-SA 4.0'
+__maintainer__ = 'Yuji Sekiguchi'
+__email__ = 'y.sekiguchi@aist.go.jp'
+__status__ = 'Development'
+
+
+import os
+import argparse
+import sys
+
+from GPMsDB_dbtk import __version__
+from GPMsDB_dbtk.main import OptionsParser
+from GPMsDB_dbtk.defaultValues import DefaultValues
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+def version():
+    import GPMsDB_dbtk
+    versionFile = open(os.path.join(GPMsDB_tk.__path__[0], 'VERSION'))
+    return versionFile.readline().strip()
+
+def print_help():
+    print('')
+    print('             .. GPMsDB toolkit for db manipulation v' + __version__ + ' ..')
+    print('''\
+
+    Genome(s) to massDB:
+      genome_wf     -> Full genomes to ms data workflow
+                       (call genes -> find marker genes -> m/z prediction)
+      list_db       -> List genome entries in the custom ms database
+      update_db     -> Add peak_list(s) to the custom ms database
+      remove_genome -> Delete entries from the custom ms database
+
+  Usage: GPMsDB_dbtk <command> -h for command specific help.
+
+  Feature requests or bug reports can be sent to Yuji Sekiguchi (y.sekiguchi@aist.go.jp)
+    or posted on GitHub (https://github.com/.....).
+    ''')
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(add_help=False)
+    subparsers = parser.add_subparsers(help="--", dest='subparser_name')
+
+    # genome workflow
+    genome_wf = subparsers.add_parser(
+        'genome_wf', formatter_class=argparse.ArgumentDefaultsHelpFormatter, description='Generating peak lists from genome fasta files.')
+    genome_wf.add_argument('gen_dir', help="directory containing genomes (fasta format)")
+    genome_wf.add_argument('out_dir',
+                              help='directory to write output files')
+    genome_wf.add_argument('-x', '--extension', default='fna', help="extension of genomes (other files in directory are ignored)")
+    genome_wf.add_argument('-t', '--threads', type=int, help="number of threads", default=DefaultValues.NO_THREAD)
+    genome_wf.add_argument(
+        '--silent', dest='silent', action="store_true", default=False, help="suppress console output")
+
+    # list custom db
+    list_db = subparsers.add_parser(
+        'list_db', formatter_class=argparse.ArgumentDefaultsHelpFormatter, description='List all genome entries in the custom database.')
+    list_db.add_argument(
+        '--silent', dest='silent', action="store_true", default=False, help="suppress console output")
+
+    # update database
+    update_db = subparsers.add_parser(
+        'update_db', formatter_class=argparse.ArgumentDefaultsHelpFormatter, description='Add peak lists (peak_list_genomes.tsv) into the custom db.')
+    update_db.add_argument('file', help="file containing a peak list (peak_list_genomes.tsv)")
+    update_db.add_argument(
+        '--silent', dest='silent', action="store_true", default=False, help="suppress console output")
+
+    # remove genomes from the custom database
+    remove_genome = subparsers.add_parser(
+        'remove_genome', formatter_class=argparse.ArgumentDefaultsHelpFormatter, description='Generating peak lists from genome fasta files.')
+    remove_genome.add_argument('accessions', type=str, help="list of genome id, comma separated (e.g., GCC_000001,GCC_000002)")
+    remove_genome.add_argument(
+        '--silent', dest='silent', action="store_true", default=False, help="suppress console output")
+
+    # check options
+    args = None
+    if(len(sys.argv) == 1 or sys.argv[1] == '-h' or sys.argv == '--help'):
+        print_help()
+        sys.exit(0)
+    else:
+        args = parser.parse_args()
+
+    try:
+        parser = OptionsParser()
+        if(False):
+            import cProfile
+            cProfile.run('parser.parse_options(args)', 'prof')
+        elif False:
+            import pdb
+            pdb.run(parser.parse_options(args))
+        else:
+            parser.parse_options(args)
+    except SystemExit:
+        print("  Controlled exit resulting from an unrecoverable error or warning.")
+    except:
+        print("\nUnexpected error:", sys.exc_info()[0])
+        raise
