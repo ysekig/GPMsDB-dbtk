@@ -25,6 +25,7 @@ git clone https://github.com/ysekig/GPMsDB-dbtk
 cd GPMsDB-dbtk
 python setup.py install
 ```
+During the installation, you may see some deprecation warnings like “easy_install command is deprecated” but this will not cause any issues for GPMsDB-dbtk.
 
 GPMsDB-dbtk requires an environment variable named GPMsDB_PATH to be set to the directory containing the unarchived reference data.
 ```bash
