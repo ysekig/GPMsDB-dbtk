@@ -23,7 +23,7 @@ setup(
     packages=['GPMsDB_dbtk', 'GPMsDB_dbtk.util'],
     scripts=['bin/GPMsDB_dbtk'],
     package_data={'GPMsDB_dbtk': ['VERSION']},
-    url='',
+    url='https://github.com/ysekig/GPMsDB-dbtk',
     mdclass={'build_ext': build_ext},
     description='Toolkit for bacterial and archaeal identification based on MALDI-TOF MS peak lists.',
     install_requires=['biolib>=0.1.0', 'numpy']
